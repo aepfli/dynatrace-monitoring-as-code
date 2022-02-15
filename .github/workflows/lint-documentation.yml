@@ -1,0 +1,21 @@
+name: gh-documentation
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-changelog:
+    name: Lint changelog file
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Lint changelog file
+      uses: docker://avtodev/markdown-lint:v1 # fastest way
+      with:
+        rules: '/lint/rules/changelog.js'
+        config: '/lint/config/changelog.yml'
+        args: './.md'
+        ignore: './one_file.md ./another_file.md' # multiple files must be separated with single space
