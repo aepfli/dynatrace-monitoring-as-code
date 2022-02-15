@@ -16,3 +16,8 @@ To contribute to the documentation, please see [documentation notes](./documenta
 
 ## License
 [Apache License v2.0](https://github.com/dynatrace-oss/dynatrace-monitoring-as-code/blob/main/LICENSE).
+
+
+## my notes :)
+
+first encounter, mixed headline style in readme - wanted or accident?
