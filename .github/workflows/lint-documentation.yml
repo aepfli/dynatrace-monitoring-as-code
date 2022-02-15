@@ -1,21 +1,33 @@
-name: gh-documentation
+name: Markdownlint
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  lint-changelog:
-    name: Lint changelog file
+  lint:
+    name: Lint Markdown files
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Lint changelog file
+    - name: Lint files
       uses: docker://avtodev/markdown-lint:v1 # fastest way
       with:
-        rules: '/lint/rules/changelog.js'
-        config: '/lint/config/changelog.yml'
-        args: './.md'
-        ignore: './one_file.md ./another_file.md' # multiple files must be separated with single space
+        args: './**/*.md'
+        # ignore: './one_file.md ./another_file.md' # multiple files must be separated with single space
+  markdown-spellcheck:
+    name: Spellchecking
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master  
+    - name: Spellchecking
+      uses: actions/setup-node@v1
+      with:
+        node-version: "15"
+    - env:
+        FORCE_COLOR: 1
+      run: npx markdown-spellcheck --en-us -n -r - **/*.md *.md
+      
